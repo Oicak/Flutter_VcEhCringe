@@ -4,14 +4,14 @@ main() {
   runApp(new PerguntaApp());
 }
 
-class PerguntaAppState extends State<PerguntaApp> {
-  int perguntaSelecionada = 0;
+class _PerguntaAppState extends State<PerguntaApp> {
+  int _perguntaSelecionada = 0;
 
-  void resposta() {
+  void _resposta() {
     setState(() {
-      perguntaSelecionada++;
+      _perguntaSelecionada++;
     });
-    print(perguntaSelecionada);
+    print(_perguntaSelecionada);
   }
 
   final perguntas = [
@@ -29,18 +29,18 @@ class PerguntaAppState extends State<PerguntaApp> {
         ),
         body: Column(
           children: [
-            Text(perguntas[perguntaSelecionada]),
+            Text(perguntas[_perguntaSelecionada]),
             TextButton(
               child: Text('Resposta 1'),
-              onPressed: resposta,
+              onPressed: _resposta,
             ),
             TextButton(
               child: Text('Resposta 2'),
-              onPressed: resposta,
+              onPressed: _resposta,
             ),
             TextButton(
               child: Text('Resposta 3'),
-              onPressed: resposta,
+              onPressed: _resposta,
             )
           ],
         ),
@@ -50,7 +50,7 @@ class PerguntaAppState extends State<PerguntaApp> {
 }
 
 class PerguntaApp extends StatefulWidget {
-  PerguntaAppState createState() {
-    return PerguntaAppState();
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
   }
 }
