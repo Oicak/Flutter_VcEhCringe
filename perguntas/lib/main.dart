@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perguntas/ehCringe.dart';
 import 'questao.dart';
 import 'reposta.dart';
 
@@ -8,35 +9,68 @@ main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   int _perguntaSelecionada = 0;
+  bool _indice = true;
 
-  void _resposta() {
+  void _respostaVerdadeira() {
     setState(() {
-      _perguntaSelecionada++;
+      _perguntaSelecionada <= 1
+          ? _perguntaSelecionada++
+          : _perguntaSelecionada = 1;
     });
-    print(_perguntaSelecionada);
+  }
+
+  void _respostaFalse() {
+    setState(() {
+      _perguntaSelecionada <= 1
+          ? _perguntaSelecionada++
+          : _perguntaSelecionada = 1;
+      _indice = false;
+    });
   }
 
   final perguntas = [
-    "Qual é o seu sexo?",
-    "Em que ano você nasceu?",
-    "Você usa calça Skin?",
-    "Você fala de Boletor"
+    {
+      'texto': "Em que periodo você nasceu?",
+      'resposta1': "1945 – 1964",
+      'resposta2': "1965 – 1979",
+      'resposta3': "1980 – 1994",
+    },
+    {
+      'texto': "Você usa calça Skin?",
+      'resposta1': 'Sim',
+      'resposta2': 'Não',
+      'resposta3': 'O que isso?',
+    },
+    {
+      'texto': "Você mecionou a palavra 'Boleto' em alguma conversa?",
+      'resposta1': 'Sim',
+      'resposta2': 'Não',
+      'resposta3': 'O que isso?',
+    }
   ];
 
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Perguntas'),
+          title: Text('Você é Cringe?'),
         ),
-        body: Column(
-          children: [
-            Questao(perguntas[_perguntaSelecionada]),
-            Resposta(texto: 'Resposta 1'),
-            Resposta(texto: 'Resposta 2'),
-            Resposta(texto: 'Resposta 2'),
-          ],
-        ),
+        body: _indice == true
+            ? Column(
+                children: [
+                  Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
+                  Resposta(
+                      perguntas[_perguntaSelecionada]['resposta1'].toString(),
+                      _respostaFalse),
+                  Resposta(
+                      perguntas[_perguntaSelecionada]['resposta2'].toString(),
+                      _respostaVerdadeira),
+                  Resposta(
+                      perguntas[_perguntaSelecionada]['resposta3'].toString(),
+                      _respostaVerdadeira),
+                ],
+              )
+            : EhCringe("Você é Cringe!"),
       ),
     );
   }
