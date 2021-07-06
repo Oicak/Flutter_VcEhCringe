@@ -13,7 +13,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   void _respostaVerdadeira() {
     setState(() {
-      _perguntaSelecionada <= 1
+      _perguntaSelecionada <= 2
           ? _perguntaSelecionada++
           : _perguntaSelecionada = 1;
     });
@@ -21,10 +21,17 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   void _respostaFalse() {
     setState(() {
-      _perguntaSelecionada <= 1
+      _perguntaSelecionada <= 2
           ? _perguntaSelecionada++
           : _perguntaSelecionada = 1;
       _indice = false;
+    });
+  }
+
+  void _resetMain() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _indice = true;
     });
   }
 
@@ -52,26 +59,32 @@ class _PerguntaAppState extends State<PerguntaApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Você é Cringe?'),
-        ),
-        body: _indice == true
-            ? Column(
-                children: [
-                  Questao(perguntas[_perguntaSelecionada]['texto'].toString()),
-                  Resposta(
-                      perguntas[_perguntaSelecionada]['resposta1'].toString(),
-                      _respostaFalse),
-                  Resposta(
-                      perguntas[_perguntaSelecionada]['resposta2'].toString(),
-                      _respostaVerdadeira),
-                  Resposta(
-                      perguntas[_perguntaSelecionada]['resposta3'].toString(),
-                      _respostaVerdadeira),
-                ],
-              )
-            : EhCringe("Você é Cringe!"),
-      ),
+          appBar: AppBar(
+            title: Align(
+                alignment: Alignment.center, child: Text('VOCÊ É CRINGE?')),
+          ),
+          body: _perguntaSelecionada > 2
+              ? EhCringe("Você não é Cringe!", _resetMain)
+              : _indice == true
+                  ? Column(
+                      children: [
+                        Questao(perguntas[_perguntaSelecionada]['texto']
+                            .toString()),
+                        Resposta(
+                            perguntas[_perguntaSelecionada]['resposta1']
+                                .toString(),
+                            _respostaFalse),
+                        Resposta(
+                            perguntas[_perguntaSelecionada]['resposta2']
+                                .toString(),
+                            _respostaVerdadeira),
+                        Resposta(
+                            perguntas[_perguntaSelecionada]['resposta3']
+                                .toString(),
+                            _respostaVerdadeira),
+                      ],
+                    )
+                  : EhCringe("Você é Cringe!", _resetMain)),
     );
   }
 }
