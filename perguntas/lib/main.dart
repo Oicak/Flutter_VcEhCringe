@@ -62,8 +62,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
     }
   ];
 
-  Widget teste(_indice, _perguntaSelecionada, perguntas, _respostaFalse,
-      _respostaVerdadeira, _resetMain) {
+  Widget perguntaEResposta(_indice, _perguntaSelecionada, perguntas,
+      _respostaFalse, _respostaVerdadeira, _resetMain) {
     if (_indice == true && _perguntaSelecionada < 4) {
       return Column(
         children: [
@@ -89,8 +89,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
           title:
               Align(alignment: Alignment.center, child: Text('VOCÊ É CRINGE?')),
         ),
-        body: teste(_indice, _perguntaSelecionada, perguntas, _respostaFalse,
-            _respostaVerdadeira, _resetMain));
+        body: perguntaEResposta(_indice, _perguntaSelecionada, perguntas,
+            _respostaFalse, _respostaVerdadeira, _resetMain));
     return MaterialApp(
       home: scaffold,
     );
